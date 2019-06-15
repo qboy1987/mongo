@@ -511,6 +511,7 @@ def variable_arch_converter(val):
         'amd64':  'x86_64',
         'emt64':   'x86_64',
         'x86':    'i386',
+        'sw':       'sw_64'
     }
     val = val.lower()
 
@@ -993,6 +994,7 @@ processor_macros = {
     's390x'   : { 'endian': 'big',    'defines': ('__s390x__',)},
     'sparc'   : { 'endian': 'big',    'defines': ('__sparc',)},
     'x86_64'  : { 'endian': 'little', 'defines': ('__x86_64', '_M_AMD64')},
+    'sw'  : { 'endian': 'little', 'defines': ('__sw_64__',)},
 }
 
 def CheckForProcessor(context, which_arch):

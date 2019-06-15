@@ -78,7 +78,7 @@ inline BENCHMARK_ALWAYS_INLINE int64_t Now() {
   int64_t ret;
   __asm__ volatile("rdtsc" : "=A"(ret));
   return ret;
-#elif defined(__x86_64__) || defined(__amd64__)
+#elif defined(__x86_64__) || defined(__amd64__) || defined(__sw_64__)
   uint64_t low, high;
   __asm__ volatile("rdtsc" : "=a"(low), "=d"(high));
   return (high << 32) | low;

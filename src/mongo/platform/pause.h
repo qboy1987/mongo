@@ -69,6 +69,10 @@
 
 #define MONGO_YIELD_CORE_FOR_SMT() __asm__ volatile("rd %%ccr, %%g0" ::: "memory")
 
+#elif defined(__sw_64__)
+
+#define MONGO_YIELD_CORE_FOR_SMT() __asm__ volatile("" ::: "memory")
+
 #else
 #error "No processor pause implementation for this architecture."
 #endif

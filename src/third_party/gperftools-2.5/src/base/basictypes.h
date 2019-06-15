@@ -354,7 +354,7 @@ class AssignAttributeStartEnd {
     // some ARMs have shorter cache lines (ARM1176JZF-S is 32 bytes for example) but obviously 64-byte aligned implies 32-byte aligned
 # elif (defined(__mips__))
 #   define CACHELINE_ALIGNED __attribute__((aligned(128)))
-# elif (defined(__aarch64__))
+# elif (defined(__aarch64__)) || defined(__sw_64__)
 #   define CACHELINE_ALIGNED __attribute__((aligned(64)))
     // implementation specific, Cortex-A53 and 57 should have 64 bytes
 # elif (defined(__s390x__))

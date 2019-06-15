@@ -135,7 +135,7 @@
  */
 #if (defined(__i386__) || defined(__x86_64__) || defined(__arm__) || \
      defined(__mips__) || defined(__PPC__) || \
-     defined(__aarch64__) || defined(__s390x__)) \
+     defined(__aarch64__) || defined(__s390x__)) || defined(__sw_64__) \
   && (defined(__linux))
 
 #ifndef SYS_CPLUSPLUS
@@ -471,6 +471,29 @@ struct kernel_stat {
   int                st_pad4[14];
 };
 #elif defined(__aarch64__)
+struct kernel_stat {
+  unsigned long      st_dev;
+  unsigned long      st_ino;
+  unsigned int       st_mode;
+  unsigned int       st_nlink;
+  unsigned int       st_uid;
+  unsigned int       st_gid;
+  unsigned long      st_rdev;
+  unsigned long      __pad1;
+  long               st_size;
+  int                st_blksize;
+  int                __pad2;
+  long               st_blocks;
+  long               st_atime_;
+  unsigned long      st_atime_nsec_;
+  long               st_mtime_;
+  unsigned long      st_mtime_nsec_;
+  long               st_ctime_;
+  unsigned long      st_ctime_nsec_;
+  unsigned int       __unused4;
+  unsigned int       __unused5;
+};
+#elif defined(__sw_64__)
 struct kernel_stat {
   unsigned long      st_dev;
   unsigned long      st_ino;
@@ -919,7 +942,7 @@ struct kernel_stat {
 
   #undef  LSS_RETURN
   #if (defined(__i386__) || defined(__x86_64__) || defined(__arm__) ||        \
-       defined(__aarch64__) || defined(__s390x__))
+       defined(__aarch64__) || defined(__s390x__)) || defined(__sw_64__)
   /* Failing system calls return a negative result in the range of
    * -1..-4095. These are "errno" values with the sign inverted.
    */
